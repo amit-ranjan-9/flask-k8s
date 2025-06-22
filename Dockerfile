@@ -17,4 +17,5 @@ ENV FLASK_RUN_HOST=0.0.0.0
 EXPOSE 8080
 
 # 6. Start the app
-CMD ["flask", "run", "--port=8080"]
+#CMD ["flask", "run", "--port=8080"]
+CMD ["flask", "run", "--host=0.0.0.0", "--port=8080"]
