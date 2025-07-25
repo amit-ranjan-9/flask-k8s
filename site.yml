@@ -1,0 +1,7 @@
+# site.yml
+- hosts: localhost
+  gather_facts: false
+  tasks:
+    - name: Print MY_PULL_VAR
+      debug:
+        msg: "Value of MY_PULL_VAR is {{ lookup('env', 'MY_PULL_VAR') }}"
