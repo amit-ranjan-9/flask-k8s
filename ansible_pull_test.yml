@@ -1,0 +1,17 @@
+# ansible_pull_test.yml
+---
+- name: Check environment variable in ansible-pull
+  hosts: localhost
+  connection: local
+  tasks:
+    - name: Print the test environment variable
+      ansible.builtin.shell: echo $MY_GITHUB_ENV_VAR
+      register: env_output
+      environment:
+        # This ensures the task looks for MY_GITHUB_ENV_VAR.
+        # If -E provides it, it will be used. Otherwise, it will be 'NOT_SET'.
+        MY_GITHUB_ENV_VAR: "{{ MY_GITHUB_ENV_VAR | default('NOT_SET') }}"
+
+    - name: Show the output
+      ansible.builtin.debug:
+        var: env_output.stdout
