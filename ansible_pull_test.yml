@@ -1,4 +1,3 @@
-# In your flask-k8s repo, the file ansible_pull_test.yml
 ---
 - hosts: localhost
   connection: local
