@@ -42,15 +42,15 @@
 #       ansible.builtin.debug:
 #         var: command_output.stdout
 # In your flask-k8s repo, the file ansible_pull_test.yml
----
-- hosts: localhost
-  connection: local
-  tasks:
-    - name: Print the test environment variable from GitHub
-      # CHANGE THIS LINE from 'command' to 'shell'
-      ansible.builtin.shell: echo "The secret is $MY_PULL_VAR"
-      register: command_output
+# ---
+# - hosts: localhost
+#   connection: local
+#   tasks:
+#     - name: Print the test environment variable from GitHub
+#       # CHANGE THIS LINE from 'command' to 'shell'
+#       ansible.builtin.shell: echo "The secret is $MY_PULL_VAR"
+#       register: command_output
 
-    - name: Show output
-      ansible.builtin.debug:
-        var: command_output.stdout
+#     - name: Show output
+#       ansible.builtin.debug:
+#         var: command_output.stdout
