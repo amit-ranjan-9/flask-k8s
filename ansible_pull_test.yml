@@ -1,17 +1,29 @@
-# ansible_pull_test.yml
+# # ansible_pull_test.yml
+# ---
+# - name: Check environment variable in ansible-pull
+#   hosts: localhost
+#   connection: local
+#   tasks:
+#     - name: Print the test environment variable
+#       ansible.builtin.shell: echo $MY_GITHUB_ENV_VAR
+#       register: env_output
+#       environment:
+#         # This ensures the task looks for MY_GITHUB_ENV_VAR.
+#         # If -E provides it, it will be used. Otherwise, it will be 'NOT_SET'.
+#         MY_GITHUB_ENV_VAR: "{{ MY_GITHUB_ENV_VAR | default('NOT_SET') }}"
+
+#     - name: Show the output
+#       ansible.builtin.debug:
+#         var: env_output.stdout
+# In your flask-k8s repo, the file ansible_pull_test.yml
 ---
-- name: Check environment variable in ansible-pull
-  hosts: localhost
+- hosts: localhost
   connection: local
   tasks:
-    - name: Print the test environment variable
-      ansible.builtin.shell: echo $MY_GITHUB_ENV_VAR
-      register: env_output
-      environment:
-        # This ensures the task looks for MY_GITHUB_ENV_VAR.
-        # If -E provides it, it will be used. Otherwise, it will be 'NOT_SET'.
-        MY_GITHUB_ENV_VAR: "{{ MY_GITHUB_ENV_VAR | default('NOT_SET') }}"
+    - name: Print the test environment variable from GitHub
+      ansible.builtin.command: echo "The secret is $MY_PULL_VAR"
+      register: command_output
 
-    - name: Show the output
+    - name: Show output
       ansible.builtin.debug:
-        var: env_output.stdout
+        var: command_output.stdout
