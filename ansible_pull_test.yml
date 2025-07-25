@@ -1,3 +1,18 @@
+# In your flask-k8s repo, the file ansible_pull_test.yml
+---
+- hosts: localhost
+  connection: local
+  # THIS IS THE MISSING LINE
+  environment: "{{ ansible_env | default({}) }}"
+
+  tasks:
+    - name: Print the test environment variable from GitHub
+      ansible.builtin.shell: echo "The secret is $MY_PULL_VAR"
+      register: command_output
+
+    - name: Show output
+      ansible.builtin.debug:
+        var: command_output.stdout
 # # ansible_pull_test.yml
 # ---
 # - name: Check environment variable in ansible-pull
